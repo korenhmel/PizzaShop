@@ -17,3 +17,7 @@ end
 get '/about' do
   erb :about
 end
+
+get '/show_products' do
+  erb :show_products
+end
