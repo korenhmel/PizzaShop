@@ -19,5 +19,6 @@ get '/about' do
 end
 
 get '/show_products' do
+  @products = Product.all
   erb :show_products
 end
