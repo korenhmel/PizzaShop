@@ -1,4 +1,40 @@
 <h2>Wellcome to Pizza Shop!!</h2>
+
+<h2 align="center">Show products</h2>
+<br>
+<div class="container">
+
+
+  <!-- Columns start at 50% wide on mobile and bump up to 33.3% wide on desktop -->
+  <div class="row">
+    <% @products.each do |list| %>
+      <div class="col-xs-6 col-md-4">
+        <h3 align="center"> <%= list.title %></h3>
+        <br>
+        <div>
+          <img src="<%= list.path_to_image %>"  style="width:300px;">
+        </div>
+        <br>
+
+        <ul>
+          <li><%= list.description %></li>
+          <li>price: <%= list.price %> hrn</li>
+          <li>size: <%= list.size %> cm</li>
+        </ul>
+
+        <div>
+          <button class="btn btn-sm btn-success" onclick="alert('Hello')">Add to cart</button>
+        </div>
+
+
+
+
+
+      </div>
+    <% end %>
+  </div>
+</div>
+
 <button type="button" class="btn btn-primary" onclick="something()">Click me!</button>
 
 
