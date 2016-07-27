@@ -25,32 +25,28 @@ get '/cart' do
   erb :cart
 end
 post '/cart' do
-   # @orders = params['orders1']
-   # @orders2 = items_from_orders(@orders)
-
- erb  :cart
+   orders_input = params[:orders]
+     @orders2 = pars_orders_line(orders_input)
+   erb  :cart
 end
-# def items_from_orders(string)
-#   elem =  string.scan(/[product\_\d\=\s\d]+/)
-#   arr = []
-#   elem.each do |el|
-#     take_digits = el.scan(/[product\_\d]+/)
-#     digits = take_digits[1]
-#     number = take_digits[0]
-#     arr2= [number.to_s, digits.to_s]
-#     arr.push arr2
-#   end
-#   p arr
-# end
 
+def pars_orders_line(orders_input)
 
+  s1= orders_input.split(/;/)
 
+  arr = []
+  s1.each do |x|
+    x2 = x.split(/\=/)
 
-
-
-
-
-
+    x3  = x2[0].split(/\_/)
+    id = x3[1]
+    cnt = x2[1]
+    arr2 = [id, cnt]
+    arr.push arr2
+    arr = arr.first(3)
+  end
+  return arr
+end
 
 post '/orders' do
 
