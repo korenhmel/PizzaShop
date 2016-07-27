@@ -1,0 +1,13 @@
+<h1>Список заказанных товаров</h1>
+<p><%= @orders %></p>
+
+<form action="/cart" method="POST">
+  <div class="form-group">
+    <label >ваш заказ:</label>
+    <input id="orders_input2" class="form-control" name="orders1" type="text" placeholder="заказ"/>
+  </div>
+  <button type="submit" class="btn btn-primary">заказать</button>
+  </form>
+
+
+

@@ -8,7 +8,10 @@ function something() {
 function add_to_cart(id) {
   var key = 'product_' + id
   var x = window.localStorage.getItem(key);
+ // var price = price
   x = x * 1 + 1;
+
+
   window.localStorage.setItem(key, x);
  // alert('Added ' + (cart_get_number_of_items()) + ' pizza(s) in your cart' );
   update_orders_input();
@@ -38,6 +41,13 @@ function update_orders_input()
 
 }
 
+//function update_orders_input2()
+//{
+//  var orders = cart_get_orders();
+//  $('#orders_input2').val(orders);
+//
+//}
+
 function update_orders_button()
 {
   var text = 'Cart('+ cart_get_number_of_items() + ')';
@@ -53,7 +63,7 @@ function cart_get_orders()
     if (key.indexOf('product_') == 0)
     {
       // cnt++;
-      orders = orders + key + '= '+ value+ '; ';
+      orders = ' '+ orders + key + '= '+ value+ '; ';
     }
   }
   return orders;
