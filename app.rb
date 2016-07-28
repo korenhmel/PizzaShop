@@ -25,8 +25,13 @@ get '/cart' do
   erb :cart
 end
 post '/cart' do
+
+
    orders_input = params[:orders]
-     @orders2 = pars_orders_line(orders_input)
+     @item = pars_orders_line(orders_input)
+    @items =  @item.each do |item|
+      item[0] = Product.find(item[0])
+     end
    erb  :cart
 end
 
@@ -53,6 +58,3 @@ post '/orders' do
 erb  :orders
 end
 
-# show_regexp('I should see "Hello Cucumber!"', /"[^"]*"$/)
-# show_regexp("это стоит дохрена и трошки", /стоит/)
-# show_regexp("it cost $344.347 dollars", /\$\d*\.\d\d/)

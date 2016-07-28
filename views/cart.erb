@@ -1,13 +1,26 @@
-<h1>Список заказанных товаров</h1>
-<p><%= @orders2 %></p>
+<h2>Список заказанных товаров:</h2>
+<br/>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>#</th>
+      <th>Name</th>
+      <th>Price</th>
+      <th>Qty</th>
+      <th>Total</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @items.each do |item| %>
+    <tr>
+      <td><%= item[0].id %></td>
+      <td><%= item[0].title %></td>
+      <td><%= item[0].price %></td>
+      <td><%= item[1] %></td>
+      <td><%= (item[0].price).to_i  * item[1].to_i %></td>
+    </tr>
+      <% end %>
 
-<form action="/cart" method="POST">
-  <div class="form-group">
-    <label >ваш заказ:</label>
-    <input id="orders_input2" class="form-control" name="orders1" type="text" placeholder="заказ"/>
-  </div>
-  <button type="submit" class="btn btn-primary">заказать</button>
-  </form>
-
-
+  </tbody>
+</table>
 
