@@ -10,6 +10,10 @@ class Product < ActiveRecord::Base
 
 end
 
+class Order < ActiveRecord::Base
+
+end
+
 
 
 get '/' do
@@ -22,6 +26,7 @@ get '/about' do
   erb :about
 end
 get '/cart' do
+  @c = Order.new
   erb :cart
 end
 post '/cart' do
@@ -32,7 +37,12 @@ post '/cart' do
     @items =  @item.each do |item|
       item[0] = Product.find(item[0])
     end
-   @o = {}
+   @c = Order.new params[:order]
+   if @c.save
+     erb "<h2> спасибо вы записались</h2>"
+   else
+     @error = @c.errors.full_messages.first
+     end
    erb  :cart
 end
 
