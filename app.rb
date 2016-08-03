@@ -2,7 +2,7 @@
 require 'rubygems'
 require 'sinatra'
 require 'sinatra/activerecord'
- # require "sinatra/reloader"
+# require "sinatra/reloader"
 
 set :database, "sqlite3:pizzashop.db"
 
@@ -15,11 +15,10 @@ class Order < ActiveRecord::Base
 end
 
 
-
 get '/' do
   @products = Product.all
 
-	erb :index
+  erb :index
 end
 
 get '/about' do
@@ -32,18 +31,13 @@ end
 post '/cart' do
 
 
-   @orders_input = params[:orders]
-     @item = pars_orders_line(@orders_input)
-    @items =  @item.each do |item|
-      item[0] = Product.find(item[0])
-    end
-   @c = Order.new params[:order]
-   if @c.save
-     erb "<h2> спасибо вы записались</h2>"
-   else
-     @error = @c.errors.full_messages.first
-     end
-   erb  :cart
+  @orders_input = params[:orders]
+  @item         = pars_orders_line(@orders_input)
+  @items        = @item.each do |item|
+    item[0] = Product.find(item[0])
+  end
+
+  erb :cart
 end
 
 def pars_orders_line(orders_input)
@@ -54,9 +48,9 @@ def pars_orders_line(orders_input)
   s1.each do |x|
     x2 = x.split(/\=/)
 
-    x3  = x2[0].split(/\_/)
-    id = x3[1]
-    cnt = x2[1]
+    x3   = x2[0].split(/\_/)
+    id   = x3[1]
+    cnt  = x2[1]
     arr2 = [id, cnt]
     arr.push arr2
     arr = arr.first(3)
@@ -64,8 +58,13 @@ def pars_orders_line(orders_input)
   return arr
 end
 
-post '/orders' do
-
-erb  :orders
+post '/place_order' do
+  @c = Order.new params[:order]
+  if @c.save
+    @message = " спасибо вы записались"
+  else
+    @error = @c.errors.full_messages.first
+  end
+  erb :orders
 end
 
