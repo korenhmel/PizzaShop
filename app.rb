@@ -17,7 +17,7 @@ end
 class Order < ActiveRecord::Base
   validates :name, presence: true, length: { in: 3..20 }
   validates :phone, presence: true, length: { minimum: 3 }
-  validates :orders_input, presence: true
+  # validates :orders_input, presence: true
   validates :address, presence: true
 end
 
@@ -31,10 +31,10 @@ end
 get '/about' do
   erb :about
 end
-# get '/cart' do
-#   @c = Order.new
-#   erb :cart
-# end
+ get '/cart' do
+   @c = Order.new
+   erb :cart
+ end
 post '/cart' do
 
  # получаем список параметров и разбираем (parse) их
@@ -88,7 +88,7 @@ post '/place_order' do
   if @c.save
   @message = " спасибо вы записались"
   else
-    @error = @c.errors.full_messages.first
+    return erb :error_valid
     end
   erb :orders
 end
