@@ -15,7 +15,10 @@ class Product < ActiveRecord::Base
 end
 
 class Order < ActiveRecord::Base
-
+  validates :name, presence: true, length: { in: 3..20 }
+  validates :phone, presence: true, length: { minimum: 3 }
+  validates :orders_input, presence: true
+  validates :address, presence: true
 end
 
 
@@ -81,10 +84,12 @@ def pars_orders_line(orders_input)
 end
 
 post '/place_order' do
-  @c = Order.create params[:order]
-
+  @c = Order.new params[:order]
+  if @c.save
   @message = " спасибо вы записались"
-
+  else
+    @error = @c.errors.full_messages.first
+    end
   erb :orders
 end
 
